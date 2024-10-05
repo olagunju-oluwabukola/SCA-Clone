@@ -1,99 +1,92 @@
 <template>
-    <div class="relative w-full overflow-hidden">
-      <h2 class="text-center font-bold text-lg mb-6">Our Partners</h2>
-      
-      <!-- Carousel container -->
-      <div
-        class="grid grid-cols-3 md:grid-cols-9 transition-transform duration-1000 ease-linear"
-        :style="getTransformStyle"
-      >
-        <!-- Cloned last card for smooth looping -->
-        <div class="flex-shrink-0 p-2">
-          <div class="bg-gray-200 rounded-lg h-24 flex items-center justify-center">
-            <img :src="cards[cards.length - 1]" class="w-16 h-16 object-contain" alt="Partner Logo" />
-          </div>
-        </div>
-  
-        <!-- Real cards -->
-        <div
-          v-for="(card, index) in cards"
-          :key="index"
-          class="flex-shrink-0 p-2"
-        >
-          <div class="bg-gray-200 rounded-lg h-24 flex items-center justify-center">
-            <img :src="card" class="w-16 h-16 object-contain" alt="Partner Logo" />
-          </div>
-        </div>
-  
-        <!-- Cloned first card for smooth looping -->
-        <div class="flex-shrink-0 p-2">
-          <div class="bg-gray-200 rounded-lg h-24 flex items-center justify-center">
-            <img :src="cards[0]" class="w-16 h-16 object-contain" alt="Partner Logo" />
+  <div>
+    <div class="text-xl md:text-5xl text-center py-4 px-5 md:px-0 md:py-10 font-semibold ">
+      <p>Brands that believe in our vision and goal</p>
+    </div>
+    <div class="logo-container overflow-hidden">
+      <div class="logos flex items-center animate-slide">
+        <div v-for="(logo, index) in [...logos, ...logos]" :key="index" class="logo-item">
+          <div class=" h-16 w-32 mx-8 flex items-center justify-center">
+            <img :src="logo.src" :alt="logo.alt" class="h-full w-full object-contain" />
           </div>
         </div>
       </div>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        currentIndex: 1, // Start at the first real card
-        cards: [
-          "https://via.placeholder.com/100/5e5e5e?text=Card+1",
-          "https://via.placeholder.com/100/5e5e5e?text=Card+2",
-          "https://via.placeholder.com/100/5e5e5e?text=Card+3",
-          "https://via.placeholder.com/100/5e5e5e?text=Card+4",
-          "https://via.placeholder.com/100/5e5e5e?text=Card+5",
-          "https://via.placeholder.com/100/5e5e5e?text=Card+6",
-          "https://via.placeholder.com/100/5e5e5e?text=Card+7",
-          "https://via.placeholder.com/100/5e5e5e?text=Card+8",
-          "https://via.placeholder.com/100/5e5e5e?text=Card+9",
-          "https://via.placeholder.com/100/5e5e5e?text=Card+10"
-        ],
-        intervalId: null,
-      };
-    },
-    mounted() {
-      this.startAutoSlide();
-    },
-    beforeDestroy() {
-      this.stopAutoSlide();
-    },
-    computed: {
-      getTransformStyle() {
-        const isSmallScreen = window.innerWidth < 768;
-        const itemWidthPercentage = isSmallScreen ? 100 / 3 : 100 / 9; // 3 cards for small screens, 9 for large
-        return `transform: translateX(-${this.currentIndex * itemWidthPercentage}%);`;
-      },
-    },
-    methods: {
-      startAutoSlide() {
-        this.intervalId = setInterval(() => {
-          this.next();
-        }, 3000); // Slide every 3 seconds
-      },
-      stopAutoSlide() {
-        clearInterval(this.intervalId);
-      },
-      next() {
-        const totalSlides = this.cards.length;
-        this.currentIndex += 1;
-  
-        if (this.currentIndex === totalSlides + 1) {
-          setTimeout(() => {
-            this.currentIndex = 1; // Loop back to the first card
-          }, 1000); // Delay for smooth transition
-        }
-      }
-    }
-  };
-  </script>
-  
-  <style scoped>
-  .grid {
-    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  </div>
+</template>
+
+<script>
+import logo1 from "/img/deimos_logo.png"
+import logo2 from "/img/Bolt_logo.png"
+import logo3 from "/img/Buckhill_logo.png"
+import logo4 from "/img/Cd_foundation.png"
+import logo5 from "/img/chimoney__1_.png"
+import logo6 from "/img/cloudbees.png"
+import logo7 from "/img/deimos_logo.png"
+import logo8 from "/img/DeployHub.png"
+import logo9 from "/img/gwg.png"
+// import logo10 from "/img/GiveInternet_logo.png"
+import logo11 from "/img/jenkins__1_.png"
+import logo12 from "/img/Lagos_State_govt.jpeg"
+import logo13 from "/img/Layer-5.png"
+import logo14 from "/img/microsoft_logo.png"
+import logo15 from "/img/nguvu_health.png"
+import logo16 from "/img/propel__1_.png"
+import logo17 from "/img/Treford_Beta_Logo-02.png"
+import logo18 from "/img/Tunga_logo.png"
+import logo19 from "/img/ZOHO_logo_2023.svg.png"
+
+export default {
+  data() {
+    return {
+      logos: [
+        { src: logo1, alt: 'Deimos Logo' },
+        { src: logo2, alt: 'Bolt Logo' },
+        { src: logo3, alt: 'Buckhill Logo' },
+        { src: logo4, alt: 'Cd Foundation Logo' },
+        { src: logo5, alt: 'Chimoney Logo' },
+        { src: logo6, alt: 'CloudBees Logo' },
+        { src: logo7, alt: 'Deimos Logo (duplicate)' }, // Consider removing this if it's not needed
+        { src: logo8, alt: 'DeployHub Logo' },
+        { src: logo9, alt: 'GWG Logo' },
+        // { src: logo10, alt: 'Give Internet Logo' },
+        { src: logo11, alt: 'Jenkins Logo' },
+        { src: logo12, alt: 'Lagos State Government Logo' },
+        { src: logo13, alt: 'Layer-5 Logo' },
+        { src: logo14, alt: 'Microsoft Logo' },
+        { src: logo15, alt: 'Nguvu Health Logo' },
+        { src: logo16, alt: 'Propel Logo' },
+        { src: logo17, alt: 'Treford Beta Logo' },
+        { src: logo18, alt: 'Tunga Logo' },
+        { src: logo19, alt: 'Zoho Logo' },
+      ],
+    };
+  },
+};
+</script>
+
+<style scoped>
+@keyframes slide {
+  0% {
+    transform: translateX(0);
   }
-  </style>
-  
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.logo-container {
+  width: 100%;
+}
+
+.logos {
+  display: flex;
+  width: max-content;
+  animation: slide 20s linear infinite;
+}
+
+.logo-item img {
+  max-height: 100%; /* Ensure the image fits within the container */
+  max-width: 100%; /* Ensure the image fits within the container */
+}
+</style>

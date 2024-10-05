@@ -1,148 +1,121 @@
 <template>
-    <div class="relative w-full overflow-hidden">
-      <!-- Outer carousel wrapper -->
+  <div class="relative overflow-hidden mx-5 md:mx-20">
+    <div
+      class="flex  transition-transform duration-1000 ease-linear"
+      :style="getTransformStyle"
+      @transitionend="handleTransitionEnd"
+    >
+      
       <div
-        class="flex transition-transform duration-1000 ease-linear"
-        :style="getTransformStyle"
+        v-for="(image, index) in displayImages"
+        :key="index"
+        class="flex-shrink-0 w-full md:w-1/3 p-2 "
       >
-        <!-- Cloned last image at the start for seamless looping -->
-        <div class="flex-shrink-0 w-full md:w-1/3 p-2">
-          <img
-            :src="images[images.length - 1]"
-            class="rounded-lg w-full h-full object-cover"
-            alt="Event Image"
-          />
-        </div>
-  
-        <!-- Real carousel items -->
-        <div
-          v-for="(image, index) in images"
-          :key="index"
-          class="flex-shrink-0 w-full md:w-1/3 p-2"
-        >
-          <img
-            :src="image"
-            class="rounded-lg w-full h-full object-cover"
-            alt="Event Image"
-          />
-        </div>
-  
-        <!-- Cloned first image at the end for seamless looping -->
-        <div class="flex-shrink-0 w-full md:w-1/3 p-2">
-          <img
-            :src="images[0]"
-            class="rounded-lg w-full h-full object-cover"
-            alt="Event Image"
-          />
-        </div>
-      </div>
-  
-      <!-- Carousel navigation buttons (left/right) -->
-      <div class="absolute inset-0 flex justify-between items-center">
-        <button
-          @click="prev"
-          class="bg-black text-white px-4 py-2 rounded-full opacity-75 hover:opacity-100 ml-2"
-        >
-          ‹
-        </button>
-        <button
-          @click="next"
-          class="bg-black text-white px-4 py-2 rounded-full opacity-75 hover:opacity-100 mr-2"
-        >
-          ›
-        </button>
+        <img
+          :src="image"
+          class="rounded-[40px]  h-full object-cover"
+          alt="Event Image"
+        />
       </div>
     </div>
-  </template>
-  
-  <script>
-  import img from "/public/img/gallery-two.ca94655463cd02e05844.png";
-  
-  export default {
-    data() {
-      return {
-        currentIndex: 1, // Start at the first real image
-        images: [
-          img,
-          img,
-          img,
-          img,
-          img,
-          img,
-          img,
-        ],
-        intervalId: null,
-      };
+
+    <div class="absolute inset-0 flex justify-between items-center">
+      <button
+        @click="prev"
+        class="bg-white  text-gray-500 px-4 py-2 rounded-full  hover:opacity-100 ml-2"
+      >
+        ‹
+      </button>
+      <button
+        @click="next"
+        class="bg-white text-gray-500 px-4 py-2 rounded-full hover:opacity-100 mr-"
+      >
+        ›
+      </button>
+    </div>
+  </div>
+</template>
+
+<script>
+import img from "/img/ada.jpg";
+import img1 from "/img/carouselimg2.png";
+import img2 from "/img/carouselImage1.jpg";
+
+export default {
+  data() {
+    return {
+      currentIndex: 0,
+      images: [
+        img,
+        img1,
+        img2,
+       
+      ],
+      totalSlides: 0,
+      transition: true,
+    };
+  },
+  computed: {
+    displayImages() {
+      
+      return [...this.images, ...this.images.slice(0, 3)];
     },
-    mounted() {
-      // Auto-slide for small screens
-      this.startAutoSlide();
+    getTransformStyle() {
+      const isSmallScreen = window.innerWidth < 768;
+      const itemWidthPercentage = isSmallScreen ? 100 : 100 / 3;
+      const offset = this.currentIndex * itemWidthPercentage;
+
+      return `transform: translateX(-${offset}%); transition: ${
+        this.transition ? 'transform 1s ease-in-out' : 'none'
+      };`;
     },
-    beforeDestroy() {
-      this.stopAutoSlide();
+  },
+  mounted() {
+    this.totalSlides = this.images.length;
+    this.startAutoSlide();
+  },
+  beforeDestroy() {
+    this.stopAutoSlide();
+  },
+  methods: {
+    startAutoSlide() {
+      this.intervalId = setInterval(() => {
+        this.next();
+      }, 4000);
     },
-    computed: {
-      getTransformStyle() {
-        const isSmallScreen = window.innerWidth < 768;
-        const itemWidthPercentage = isSmallScreen ? 100 : 100 / 3; // Show 1 image on small screens, 3 on large
-        return `transform: translateX(-${this.currentIndex * itemWidthPercentage}%);`;
-      },
+    stopAutoSlide() {
+      clearInterval(this.intervalId);
     },
-    methods: {
-      startAutoSlide() {
-        // Auto-slide every 4 seconds for small screens
-        this.intervalId = setInterval(() => {
-          this.next();
-        }, 4000);
-      },
-      stopAutoSlide() {
-        clearInterval(this.intervalId);
-      },
-      next() {
-        const isSmallScreen = window.innerWidth < 768;
-        const totalSlides = this.images.length;
-  
-        if (isSmallScreen) {
-          // For small screens, advance one image at a time
-          this.currentIndex += 1;
-  
-          if (this.currentIndex === totalSlides + 1) {
-            // If we've reached the end, transition back to the first image
-            setTimeout(() => {
-              this.currentIndex = 1; // Move instantly to the first real image
-            }, 1000); // Delay to let the transition complete
-          }
-        } else {
-          // For larger screens, advance in steps of 3
-          this.currentIndex += 1;
-  
-          if (this.currentIndex === totalSlides + 1) {
-            setTimeout(() => {
-              this.currentIndex = 1;
-            }, 1000);
-          }
-        }
-      },
-      prev() {
-        const totalSlides = this.images.length;
-  
-        this.currentIndex -= 1;
-  
-        if (this.currentIndex === 0) {
-          // If we've reached the start, transition to the last real image
-          setTimeout(() => {
-            this.currentIndex = totalSlides; // Move instantly to the last real image
-          }, 1000);
-        }
-      },
+    next() {
+      if (this.currentIndex < this.totalSlides) {
+        this.currentIndex++;
+      } else {
+        
+        this.transition = false;
+        this.currentIndex = 1; 
+      }
     },
-  };
-  </script>
-  
-  <style scoped>
-  /* Optional: Add CSS for smoother "water-like" animation feel */
-  .flex {
-    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-  </style>
-  
+    prev() {
+      if (this.currentIndex > 0) {
+        this.currentIndex--;
+      } else {
+        
+        this.transition = false;
+        this.currentIndex = this.totalSlides;
+      }
+    },
+    handleTransitionEnd() {
+      
+      if (this.currentIndex === this.totalSlides) {
+        this.transition = true;
+      }
+    },
+  },
+};
+</script>
+
+<style scoped>
+.flex {
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+</style>
