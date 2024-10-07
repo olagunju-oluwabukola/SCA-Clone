@@ -6,7 +6,9 @@
     <mission/>
     <Impact/>
     <whatWeDo/>
-    
+    <Testimonial/>
+    <Gallery/>
+    <CTA/>
     <div v-if="isModalVisible" class="fixed inset-0 bg-black bg-opacity-50"></div>
 
    
@@ -67,8 +69,9 @@ import LogoCarousel from '@/Components/Home/LogoCarousel.vue';
 import Mission from '@/Components/Home/Mission.vue';
 import Impact from '@/Components/Home/Impact.vue';
 import whatWeDo from '@/Components/Home/whatWeDo.vue';
-
-
+import Testimonial from '@/Components/Home/Testimonial.vue';
+import Gallery from '@/Components/Home/Gallery.vue';
+import CTA from '@/Components/Home/CTA.vue';
 const isModalVisible = ref(false);
 
 

@@ -1,19 +1,18 @@
 <template>
   <div class="relative overflow-hidden mx-5 md:mx-20">
     <div
-      class="flex  transition-transform duration-1000 ease-linear"
+      class="flex transition-transform duration-1000 ease-linear"
       :style="getTransformStyle"
       @transitionend="handleTransitionEnd"
     >
-      
       <div
         v-for="(image, index) in displayImages"
         :key="index"
-        class="flex-shrink-0 w-full md:w-1/3 p-2 "
+        class="flex-shrink-0 w-full md:w-1/3 p-2"
       >
         <img
           :src="image"
-          class="rounded-[40px]  h-full object-cover"
+          class="rounded-[40px] h-full object-cover"
           alt="Event Image"
         />
       </div>
@@ -22,13 +21,13 @@
     <div class="absolute inset-0 flex justify-between items-center">
       <button
         @click="prev"
-        class="bg-white  text-gray-500 px-4 py-2 rounded-full  hover:opacity-100 ml-2"
+        class="bg-white text-gray-500 px-4 py-2 rounded-full hover:opacity-100 ml-2"
       >
         ‹
       </button>
       <button
         @click="next"
-        class="bg-white text-gray-500 px-4 py-2 rounded-full hover:opacity-100 mr-"
+        class="bg-white text-gray-500 px-4 py-2 rounded-full hover:opacity-100 mr-2"
       >
         ›
       </button>
@@ -37,79 +36,82 @@
 </template>
 
 <script>
-import img from "/img/ada.jpg";
-import img1 from "/img/carouselimg2.png";
-import img2 from "/img/carouselImage1.jpg";
+import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
+import img from '/img/ada.jpg';
+import img1 from '/img/carouselimg2.png';
+import img2 from '/img/carouselImage1.jpg';
 
 export default {
-  data() {
-    return {
-      currentIndex: 0,
-      images: [
-        img,
-        img1,
-        img2,
-       
-      ],
-      totalSlides: 0,
-      transition: true,
-    };
-  },
-  computed: {
-    displayImages() {
-      
-      return [...this.images, ...this.images.slice(0, 3)];
-    },
-    getTransformStyle() {
+  setup() {
+    const currentIndex = ref(0);
+    const images = ref([img, img1, img2]);
+    const totalSlides = ref(images.value.length);
+    const transition = ref(true);
+    let intervalId = null;
+
+    const displayImages = computed(() => {
+      return [...images.value, ...images.value.slice(0, 3)];
+    });
+
+    const getTransformStyle = computed(() => {
       const isSmallScreen = window.innerWidth < 768;
       const itemWidthPercentage = isSmallScreen ? 100 : 100 / 3;
-      const offset = this.currentIndex * itemWidthPercentage;
-
+      const offset = currentIndex.value * itemWidthPercentage;
       return `transform: translateX(-${offset}%); transition: ${
-        this.transition ? 'transform 1s ease-in-out' : 'none'
+        transition.value ? 'transform 1s ease-in-out' : 'none'
       };`;
-    },
-  },
-  mounted() {
-    this.totalSlides = this.images.length;
-    this.startAutoSlide();
-  },
-  beforeDestroy() {
-    this.stopAutoSlide();
-  },
-  methods: {
-    startAutoSlide() {
-      this.intervalId = setInterval(() => {
-        this.next();
+    });
+
+    const startAutoSlide = () => {
+      intervalId = setInterval(() => {
+        next();
       }, 4000);
-    },
-    stopAutoSlide() {
-      clearInterval(this.intervalId);
-    },
-    next() {
-      if (this.currentIndex < this.totalSlides) {
-        this.currentIndex++;
+    };
+
+    const stopAutoSlide = () => {
+      clearInterval(intervalId);
+    };
+
+    const next = () => {
+      if (currentIndex.value < totalSlides.value) {
+        currentIndex.value++;
       } else {
-        
-        this.transition = false;
-        this.currentIndex = 1; 
+        transition.value = false;
+        currentIndex.value = 1;
       }
-    },
-    prev() {
-      if (this.currentIndex > 0) {
-        this.currentIndex--;
+    };
+
+    const prev = () => {
+      if (currentIndex.value > 0) {
+        currentIndex.value--;
       } else {
-        
-        this.transition = false;
-        this.currentIndex = this.totalSlides;
+        transition.value = false;
+        currentIndex.value = totalSlides.value;
       }
-    },
-    handleTransitionEnd() {
-      
-      if (this.currentIndex === this.totalSlides) {
-        this.transition = true;
+    };
+
+    const handleTransitionEnd = () => {
+      if (currentIndex.value === totalSlides.value) {
+        transition.value = true;
       }
-    },
+    };
+
+    onMounted(() => {
+      startAutoSlide();
+    });
+
+    onBeforeUnmount(() => {
+      stopAutoSlide();
+    });
+
+    return {
+      currentIndex,
+      displayImages,
+      getTransformStyle,
+      next,
+      prev,
+      handleTransitionEnd,
+    };
   },
 };
 </script>
