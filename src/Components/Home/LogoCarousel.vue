@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="text-xl md:text-5xl text-center py-4 px-5 md:px-0 md:py-10 font-semibold ">
+    <div class="text-xl md:text-5xl text-center py-10 px-5 md:px-0 md:py-14 font-semibold ">
       <p>Brands that believe in our vision and goal</p>
     </div>
     <div class="logo-container overflow-hidden">
       <div class="logos flex items-center animate-slide">
         <div v-for="(logo, index) in [...logos, ...logos]" :key="index" class="logo-item">
-          <div class=" h-16 w-32 mx-8 flex items-center justify-center">
+          <div class=" h-16 w-32 mx-2 flex items-center justify-center">
             <img :src="logo.src" :alt="logo.alt" class="h-full w-full object-contain" />
           </div>
         </div>
@@ -86,7 +86,7 @@ export default {
 }
 
 .logo-item img {
-  max-height: 100%; /* Ensure the image fits within the container */
-  max-width: 100%; /* Ensure the image fits within the container */
+  max-height: 100%; 
+  max-width: 100%; 
 }
 </style>

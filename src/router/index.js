@@ -20,6 +20,16 @@ const router = createRouter({
       component: () => import('../Views/TeamView.vue')
     },
     {
+      path: '/Academy',
+      name: 'Academy',
+      component: () => import('../Views/AcademyView.vue')
+    },
+    {
+      path: '/Mentorsip',
+      name: 'Mentorship',
+      component: () => import('../Views/MentorshipView.vue')
+    },
+    {
       path: '/School of Applied Skills',
       name: 'SOA',
       component: () => import('../Views/SOAView.vue')

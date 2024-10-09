@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-gradient-to-b from-pink-100 to-white">
+  <section class="bg-[#f0cde1]">
 
     <div class="flex flex-col items-center justify-center min-h-screen">
     <h1 class="text-5xl leading-normal px-4 md:px-0 md:text-6xl font-bold text-center mb-4">
