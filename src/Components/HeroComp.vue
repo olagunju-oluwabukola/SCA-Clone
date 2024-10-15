@@ -37,7 +37,7 @@
 
     <div class="mt-8 flex flex-col sm:flex-row gap-4">
       <button
-        class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-6 rounded-lg flex"
+        class="bg-[#b70569] hover:bg-white border hover:text-[#b70569] hover:border-[#b70569] text-white font-bold py-2 px-6 rounded-lg flex"
       >
         Become a Member
         <svg
@@ -55,7 +55,7 @@
           </svg>
       </button>
       <button
-        class="border-2 border-pink-600 hover:bg-pink-600 hover:text-white text-pink-600 font-bold py-2 px-6 rounded-lg"
+        class="border-2 border-[#b70569] hover:bg-[#b70569] hover:text-white text-[#b70569] font-bold py-2 px-6 rounded-lg"
       >
         Donate
       </button>

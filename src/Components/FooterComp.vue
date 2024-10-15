@@ -5,7 +5,7 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-4 sm:px-8">
          
           <div>
-            <img class="w-40" src="/public/img/she-code-africa-logo.3e5ece7da496dd4084faeace2e61168b.svg" alt="">
+            <img class="w-40 hidden md:block" src="/public/img/she-code-africa-logo.3e5ece7da496dd4084faeace2e61168b.svg" alt="">
           </div>
 
           <div>

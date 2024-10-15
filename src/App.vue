@@ -4,7 +4,10 @@
 <div>
   <navbar/>
 </div>
-<router-view/>
+<div class="">
+  <router-view/>
+</div>
+
 <footer>
   <footer-comp/>
 </footer>

@@ -52,7 +52,7 @@
         testimonials: [
           {
             name: 'Ruth Ikegah',
-            text: 'She Code Africa Mentor-ship Program was a huge part of my growth as a woman in tech. I am grateful to my mentor who stressed an understanding of the basics of programming, explaining the concepts in beginner-friendly terms.',
+            text: 'She Code Africa Mentor-ship Program was a huge part of my growth as a woman in tech. I am grateful to my mentor who stressed on understanding the basics of programming explaining the concepts in beginner friendly terms, my fellow mentees who I learnt so much from, to the founder fr this great initiative and to the team members making this possible. Thanks!',
             image: img,
           },
           {

@@ -22,7 +22,7 @@
         <a
           href="https://drive.google.com/drive/folders/1VsF4fQvNLXXuwWnLi2ThjD6oZxJYdFkp"
           target="_blank"
-          class="text-pink-600 font-medium"
+          class="text-[#b70569] font-medium"
           >View More Photos &rarr;</a
         >
       </div>
@@ -46,11 +46,17 @@
           <p class="text-gray-600 mb-6">
             Explore diverse tech talents of your choice with genuine skill sets and good workplace ethics.
           </p>
-          <button
-            class="bg-[#b70569] text-white px-6 py-3 rounded-full font-medium shadow-lg transition"
+
+          <router-link to="/hire">
+
+            <button
+            class="bg-[#b70569] text-white px-6 py-3 rounded-xl font-medium shadow-lg transition hover:bg-transparent hover:text-[#b70569] hover:border hover:border-[#b70569]"
           >
             Hire Our Talent
           </button>
+
+          </router-link>
+        
         </div>
 
         <div class="relative">

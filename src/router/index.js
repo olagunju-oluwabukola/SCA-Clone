@@ -79,6 +79,11 @@ const router = createRouter({
       name: 'donate',
       component: () => import('../Views/DonateView.vue')
     },
+    {
+      path: '/hire',
+      name: 'Hire',
+      component: () => import('../Views/HireView.vue')
+    },
   ]
 })
 
