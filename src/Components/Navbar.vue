@@ -125,7 +125,7 @@
     <router-link class="block px-4 py-2 hover:bg-gray-100" to="/chapters">SCA Chapters</router-link>
     <router-link to="/jobs" class="block px-4 py-2 hover:bg-gray-100">Jobs</router-link>
 
-    <RouterLink to="/donate" class="block bg-pink-600 text-white px-4 py-2 rounded-full hover:bg-pink-700">
+    <RouterLink to="/donate" class="block bg-primary text-white px-4 py-2 rounded-ful">
       Donate
     </RouterLink>
   </ul>

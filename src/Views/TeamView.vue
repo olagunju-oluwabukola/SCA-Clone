@@ -1,11 +1,11 @@
 <template>
-  team
+  <Team/>
+  <TeamCard/>
 </template>
 
-<script>
-export default {
-
-}
+<script setup>
+import Team from '@/Components/Team.vue';
+import TeamCard from '@/Components/TeamCard.vue';
 </script>
 
 <style>

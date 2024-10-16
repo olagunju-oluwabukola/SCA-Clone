@@ -40,19 +40,6 @@
         class="bg-[#b70569] hover:bg-white border hover:text-[#b70569] hover:border-[#b70569] text-white font-bold py-2 px-6 rounded-lg flex"
       >
         Become a Member
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            :class=" 'rotate-250' "
-            class="h-5 w-5 transform transition-transform duration-300"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M5.292 7.707a1 1 0 011.415 0L10 11l3.293-3.293a1 1 0 111.415 1.415l-4 4a1 1 0 01-1.415 0l-4-4a1 1 0 010-1.415z"
-              clip-rule="evenodd"
-            />
-          </svg>
       </button>
       <button
         class="border-2 border-[#b70569] hover:bg-[#b70569] hover:text-white text-[#b70569] font-bold py-2 px-6 rounded-lg"
